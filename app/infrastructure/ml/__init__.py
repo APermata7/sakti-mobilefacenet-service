@@ -1,0 +1,1 @@
+from app.infrastructure.ml.model_loader import MobileFaceNetModel, get_model
