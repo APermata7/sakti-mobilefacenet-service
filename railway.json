@@ -1,0 +1,12 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port 5002",
+    "healthcheckPath": "/health"
+  },
+  "nixpacks": {
+    "packages": ["python310", "gcc", "g++"]
+  }
+}

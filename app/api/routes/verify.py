@@ -8,6 +8,7 @@ from app.core.config import settings
 from app.utils.logger import log
 
 router = APIRouter(prefix="/api/v1", tags=["Face Verification"])
+
 face_service = FaceService()
 
 @router.post("/verify", response_model=FaceVerificationResponse)

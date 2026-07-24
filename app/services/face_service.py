@@ -1,4 +1,4 @@
-from typing import Tuple, Optional, Dict
+from typing import Tuple, Optional
 from app.infrastructure.ml.model_loader import get_model
 from app.utils.image_utils import download_image, cosine_similarity, validate_face_image
 from app.core.config import settings
@@ -7,8 +7,16 @@ from app.utils.logger import log
 class FaceService:
     
     def __init__(self):
-        self.model = get_model()
+        self._model = None
         self.threshold = settings.VERIFICATION_THRESHOLD
+    
+    @property
+    def model(self):
+        if self._model is None:
+            log.info("Loading model (lazy)...")
+            self._model = get_model()
+            log.info("Model loaded successfully")
+        return self._model
     
     def verify(self, reference_url: str, selfie_url: str) -> Tuple[bool, float, Optional[str]]:
         log.info(f"Memulai verifikasi wajah")
