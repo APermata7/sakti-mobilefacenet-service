@@ -1,12 +1,10 @@
 {
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "RAILPACK",
+    "buildCommand": "pip install -r requirements.txt && python pre_download.py"
   },
   "deploy": {
     "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port 5002",
     "healthcheckPath": "/health"
-  },
-  "nixpacks": {
-    "packages": ["python310", "gcc", "g++"]
   }
 }
