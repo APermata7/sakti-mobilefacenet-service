@@ -1,7 +1,6 @@
 {
   "build": {
-    "builder": "RAILPACK",
-    "buildCommand": "pip install -r requirements.txt && python pre_download.py"
+    "builder": "NIXPACKS"
   },
   "deploy": {
     "startCommand": "uvicorn app.main:app --host 0.0.0.0 --port 5002",
