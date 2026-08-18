@@ -1,7 +1,10 @@
-import sys, os
-import site
+import sys
+import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
-from app.main import app as application
+from asgiref.wsgi import WsgiToAsgi
+from app.main import app
+
+application = WsgiToAsgi(app)
