@@ -11,13 +11,16 @@ Layanan Verifikasi Wajah menggunakan MobileFaceNet dan InsightFace untuk Sistem 
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10-3776AB?style=for-the-badge&logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/Python-3.9-3776AB?style=for-the-badge&logo=python" alt="Python">
   &nbsp;
   <img src="https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi" alt="FastAPI">
   &nbsp;
   <img src="https://img.shields.io/badge/InsightFace-0.7.3-FF6B6B?style=for-the-badge" alt="InsightFace">
   &nbsp;
-  <img src="https://img.shields.io/badge/ONNX-1.27.0-000000?style=for-the-badge&logo=onnx" alt="ONNX">
+  <img src="https://img.shields.io/badge/ONNX-1.19.2-000000?style=for-the-badge&logo=onnx" alt="ONNX">
+  &nbsp;
+  <img src="https://img.shields.io/badge/cPanel-Deployment-FF6C2C?style=for-the-badge&logo=cpanel" alt="cPanel">
+</p>
 
 ---
 
@@ -87,13 +90,13 @@ Layanan ini dapat dikonfigurasi melalui environment variables:
 
 | Komponen | Teknologi |
 |----------|-----------|
-| Bahasa Pemrograman | Python 3.10 |
+| Bahasa Pemrograman | Python 3.9 |
 | Framework | FastAPI |
 | Face Recognition | InsightFace 0.7.3 |
 | Model | MobileFaceNet (buffalo_l) |
-| Inference Engine | ONNX Runtime 1.27.0 |
+| Inference Engine | ONNX Runtime 1.19.2 |
 | Image Processing | OpenCV, Pillow |
-| Deployment | Railway |
+| Deployment | cPanel (Passenger + a2wsgi) |
 
 ---
 
@@ -167,7 +170,8 @@ sakti_mobilefacenet_service/
 │   └── main.py                
 │
 ├── models_data/              
-├── logs/                      
+├── logs/   
+├── passenger_wsgi.py
 ├── requirements.txt           
 ├── .env.example                            
 └── README.md
@@ -215,7 +219,7 @@ cp .env.example .env
 
 ## ▶ Menjalankan Aplikasi
 
-Development
+### Development
 
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 5002 --reload
@@ -227,10 +231,14 @@ Aplikasi akan berjalan pada
 http://localhost:5002
 ```
 
-Production
+### Production
+
+Aplikasi dideploy di cPanel menggunakan Passenger WSGI dengan file passenger_wsgi.py.
+
+Domain:
 
 ```bash
-uvicorn app.main:app --host 0.0.0.0 --port 5002 --no-reload
+https://presensi.kopegtelmalang.co.id
 ```
 ---
 
